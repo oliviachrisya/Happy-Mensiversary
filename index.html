@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satu Bulan Kita</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#e6f1fb; --mist:#f5f9fd; --pale:#cfe3f6; --blue:#9cc4ea; --mid:#5f93c0; --deep:#2f5f8c; --ink:#1d3347; --soft:#667f96;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--sky);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:auto;padding:0 24px}
+section{padding:110px 0}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.05;color:var(--deep);letter-spacing:-.01em}
+.lead{color:var(--soft);max-width:460px;margin-top:14px}
+.head{margin-bottom:52px}
+button,.btn{font:inherit;font-weight:500;font-size:.95rem;border:0;border-radius:4px;padding:13px 26px;background:var(--deep);color:#fff;cursor:pointer;transition:background .2s,transform .2s;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{background:var(--ink)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.ghost{background:transparent;color:var(--deep);box-shadow:inset 0 0 0 1.5px var(--blue)}
+.ghost:hover{background:var(--pale)}
+:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
+
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:30;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(230,241,251,.82);backdrop-filter:blur(10px)}
+header b{font-family:var(--serif);font-size:1.4rem;color:var(--deep);font-weight:600}
+header nav{display:flex;gap:26px}
+header nav a{color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:500}
+header nav a:hover{color:var(--mid)}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 70px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(3.4rem,9vw,7.2rem);line-height:.92;color:var(--deep);letter-spacing:-.02em}
+.hero h1 i{display:block;font-weight:500;color:var(--mid)}
+.hero p{margin:26px 0 34px;max-width:420px;color:var(--soft);font-size:1.05rem}
+.meta{display:flex;gap:36px;margin-top:44px;padding-top:22px;border-top:1px solid var(--blue)}
+.meta b{display:block;font-family:var(--serif);font-size:2.4rem;line-height:1;color:var(--deep);font-weight:500}
+.meta span{font-size:.85rem;color:var(--soft)}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+.collage .a{border-radius:999px 999px 14px 14px;overflow:hidden;aspect-ratio:3/5}
+.collage .b{display:grid;gap:14px}
+.collage .b div{border-radius:14px;overflow:hidden;aspect-ratio:1}
+.collage .b div:first-child{border-radius:14px 14px 999px 14px;aspect-ratio:4/5}
+.collage img{width:100%;height:100%;object-fit:cover}
+.hero .in{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero .in:nth-child(2){animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+
+/* story */
+.story{background:var(--mist)}
+.line{position:relative;display:grid;gap:70px}
+.line::before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1px;background:var(--blue)}
+.ev{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+.ev::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:13px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--mist);border:2px solid var(--mid)}
+.ev .pic{aspect-ratio:4/3;border-radius:6px;overflow:hidden}
+.ev .pic img{width:100%;height:100%;object-fit:cover}
+.ev:nth-child(even) .pic{order:2}
+.ev time{font-size:.85rem;color:var(--mid);font-weight:700}
+.ev h3{font-family:var(--serif);font-weight:500;font-size:2.2rem;line-height:1.1;color:var(--deep);margin:4px 0 10px}
+.ev p{color:var(--soft);max-width:380px}
+
+/* gallery */
+.gal{columns:3 260px;column-gap:16px}
+.gal figure{break-inside:avoid;margin-bottom:16px;position:relative;overflow:hidden;border-radius:6px;cursor:zoom-in}
+.gal img{width:100%;transition:transform .6s}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-family:var(--serif);font-size:1.3rem;background:linear-gradient(transparent,rgba(29,51,71,.55));opacity:0;transition:opacity .3s}
+.gal figure:hover figcaption,.gal figure:focus-within figcaption{opacity:1}
+#lb{position:fixed;inset:0;background:rgba(29,51,71,.88);display:none;place-items:center;z-index:50;padding:24px;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-height:88vh;border-radius:6px}
+
+/* game */
+.gameGrid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:48px;align-items:start}
+.board{background:var(--mist);padding:20px;border-radius:10px}
+#grid{display:grid;gap:4px;touch-action:none;user-select:none;-webkit-user-select:none}
+.cell{aspect-ratio:1;display:grid;place-items:center;font-weight:700;font-size:clamp(.72rem,2.6vw,1.1rem);border-radius:6px;background:var(--sky);color:var(--ink);transition:background .12s}
+.cell.sel{background:var(--blue);color:#fff}
+.cell.found{background:var(--deep);color:#fff}
+.cell.pop{animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.18)}}
+.side h3{font-family:var(--serif);font-weight:500;font-size:1.7rem;color:var(--deep);margin-bottom:12px}
+#words{list-style:none;display:grid;gap:8px;margin-bottom:22px}
+#words li{padding:10px 14px;background:var(--mist);border-radius:6px;font-weight:500;display:flex;justify-content:space-between}
+#words li.done{background:var(--deep);color:#fff}
+#words li.done::after{content:"Ketemu";font-size:.8rem;opacity:.8}
+#msg{min-height:1.7em;color:var(--mid);font-weight:500;margin-bottom:16px}
+
+/* photobooth */
+.booth{background:var(--mist)}
+.boothGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.device{background:#fff;border-radius:22px;padding:22px;box-shadow:0 30px 60px -30px rgba(47,95,140,.4)}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.top .ico{width:46px;height:46px}
+.top .ico img,.top .ico svg{width:100%;height:100%;object-fit:contain}
+.top span{font-size:.85rem;color:var(--soft)}
+.screen{position:relative;aspect-ratio:3/4;border-radius:8px;overflow:hidden;background:var(--pale);border:14px solid var(--fc,#fff);transition:border-color .3s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.screen video,.screen .up{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.screen .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:var(--soft);font-size:.9rem}
+.screen .fr{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:flash .55s}
+@keyframes flash{from{opacity:1}to{opacity:0}}
+#count{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-size:9rem;color:#fff;text-shadow:0 6px 30px rgba(29,51,71,.35);pointer-events:none}
+.colors{display:flex;align-items:center;gap:10px;margin:18px 0 6px;flex-wrap:wrap}
+.colors small{color:var(--soft);margin-right:4px}
+.sw{width:30px;height:30px;border-radius:50%;padding:0;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.18);cursor:pointer}
+.sw[aria-pressed=true]{box-shadow:0 0 0 2px var(--deep)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+#camMsg{font-size:.85rem;color:var(--soft);margin-top:12px;min-height:1.4em}
+.strip{display:flex;flex-direction:column;align-items:center;gap:16px;min-height:260px;padding:10px 0}
+.strip .hint{color:var(--soft);max-width:260px;text-align:center;margin-top:90px}
+.polaroid{width:min(250px,78%);box-shadow:0 14px 30px -10px rgba(29,51,71,.4);animation:print .9s cubic-bezier(.2,1.1,.3,1) both}
+.polaroid:nth-child(odd){--r:-3deg}.polaroid:nth-child(even){--r:2.5deg}
+@keyframes print{from{transform:translateY(-140px) rotate(8deg);opacity:0}to{transform:translateY(0) rotate(var(--r));opacity:1}}
+
+footer{padding:90px 24px;text-align:center}
+footer p:first-child{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);color:var(--deep);line-height:1.1}
+footer p:last-child{color:var(--soft);margin-top:12px;font-size:.9rem}
+
+/* responsif */
+@media(max-width:900px){
+  section{padding:76px 0}
+  header nav{gap:16px}header nav a{font-size:.82rem}
+  .hero .wrap,.boothGrid,.gameGrid{grid-template-columns:1fr;gap:40px}
+  .hero{padding-top:100px}
+  .collage{max-width:440px;margin:auto}
+  .line::before{left:10px}
+  .ev,.ev:nth-child(even){grid-template-columns:1fr;gap:18px;padding-left:36px}
+  .ev::after{left:10px;top:12px;margin-top:0}
+  .ev:nth-child(even) .pic{order:0}
+}
+@media(max-width:520px){header b{display:none}header{justify-content:center}.meta{gap:24px}.board{padding:12px}}
+@media(min-width:1500px){.wrap{max-width:1280px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <b id="brand">N &amp; D</b>
+  <nav><a href="#cerita">Cerita</a><a href="#galeri">Galeri</a><a href="#game">Cari kata</a><a href="#foto">Photobooth</a></nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="in">
+      <h1>Satu bulan<i>bersamamu</i></h1>
+      <p id="heroText">Berawal dari candaan, lalu chat anonim, lalu kamu. Halaman kecil ini aku buat khusus untuk merayakannya.</p>
+      <a class="btn" href="#cerita">Baca ceritanya</a>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="collage in" id="collage"></div>
+  </div>
+</section>
+
+<section class="story" id="cerita">
+  <div class="wrap">
+    <div class="head"><h2>Cerita kita</h2><p class="lead">Dari usernamemu di CF sampai hari kamu bilang suka.</p></div>
+    <div class="line" id="line"></div>
+  </div>
+</section>
+
+<section id="galeri">
+  <div class="wrap">
+    <div class="head"><h2>Galeri</h2><p class="lead">Klik foto untuk melihat lebih besar.</p></div>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<section class="booth" id="game" style="background:var(--sky)">
+  <div class="wrap">
+    <div class="head"><h2>Cari kata</h2><p class="lead">Geser dari huruf pertama ke huruf terakhir, atau ketuk dua huruf secara berurutan. Kata bisa mendatar, menurun, atau diagonal.</p></div>
+    <div class="gameGrid">
+      <div class="board"><div id="grid" role="grid" aria-label="Kotak cari kata"></div></div>
+      <div class="side">
+        <h3>Kata yang dicari</h3>
+        <ul id="words"></ul>
+        <div id="msg" role="status"></div>
+        <button class="ghost" onclick="newGame()">Acak ulang</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booth" id="foto">
+  <div class="wrap">
+    <div class="head"><h2>Photobooth</h2><p class="lead">Pilih warna frame, nyalakan kamera, lalu ambil tiga foto berurutan.</p></div>
+    <div class="boothGrid">
+      <div class="device">
+        <div class="top"><div class="ico" id="camIcon"></div><span id="status">Kamera belum aktif</span></div>
+        <div class="screen" id="screen">
+          <div class="ph" id="ph">Tekan Nyalakan kamera untuk mulai</div>
+          <video id="video" autoplay playsinline muted hidden></video>
+          <img class="up" id="up" alt="" hidden>
+          <img class="fr" id="fr" alt="" hidden>
+          <div class="flash" id="flash"></div><div id="count"></div>
+        </div>
+        <div class="colors" id="colors"><small>Warna frame</small></div>
+        <div class="row">
+          <button id="btnCam" onclick="startCam()">Nyalakan kamera</button>
+          <button id="btnShot" onclick="photoshoot()" disabled>Mulai foto</button>
+          <button class="ghost" onclick="document.getElementById('file').click()">Upload foto</button>
+          <input id="file" type="file" accept="image/*" hidden onchange="useUpload(this)">
+        </div>
+        <p id="camMsg"></p>
+      </div>
+      <div>
+        <div class="strip" id="strip"></div>
+        <div class="row" style="justify-content:center"><button id="btnDl" onclick="downloadStrip()" disabled>Unduh strip foto</button><button class="ghost" onclick="resetStrip()">Ulangi</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Terima kasih sudah memilih aku.</p>
+  <p id="foot"></p>
+</footer>
+
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+
+<script>
+/* =====================================================
+   PENGATURAN. Ganti isi di blok ini saja.
+   Kosongkan "foto" ("") untuk memakai foto dummy otomatis.
+   ===================================================== */
+const CONFIG = {
+  namaKamu: "Nama Kamu",
+  namaDia: "Nama Dia",
+  tanggalJadian: "2026-10-06",     // TAHUN-BULAN-TANGGAL
+  ikonKamera: "",                  // contoh: "aset/kamera.png" (PNG Pngtree)
+  framePNG: "",                    // contoh: "aset/frame.png" (PNG transparan, rasio 3:4)
+  caption: "Satu bulan kita"
+};
+const HERO = ["", "", ""];         // 3 foto di bagian atas, contoh: "foto/hero1.jpg"
+const CERITA = [
+  {tgl:"Awal", judul:"Pertama kali lihat", foto:"", teks:"Aku lihat usernamemu di CF temanku. Aku bilang ke dia, ada yang ganteng, boleh dikenalin. Niatnya cuma bercanda."},
+  {tgl:"Minggu pertama", judul:"Chat lewat anon", foto:"", teks:"Candaan itu ternyata diseriusin. Kamu belum mau di-chat duluan, jadi kita mulai lewat anon."},
+  {tgl:"Beberapa hari kemudian", judul:"Aku chat duluan", foto:"", teks:"Aku sudah bosan anon-anonan, jadi aku chat kamu langsung. Sejak itu obrolan kita ngalir."},
+  {tgl:"Setelahnya", judul:"Ngobrol dan mabar", foto:"", teks:"Kadang bahas hal random, kadang mabar sampai lupa waktu. Pelan-pelan kamu jadi kebiasaan favoritku."},
+  {tgl:"Hari jadi", judul:"Kamu bilang suka", foto:"", teks:"Lalu tiba hari kamu nembak aku. Jawabanku sudah jelas dari lama."}
+];
+const GALERI = [   // rasio: "4/5", "1/1", "3/4", "4/3"
+  {foto:"", cap:"Hari pertama", rasio:"4/5"}, {foto:"", cap:"Mabar bareng", rasio:"4/3"},
+  {foto:"", cap:"Senyummu", rasio:"3/4"},     {foto:"", cap:"Jalan berdua", rasio:"1/1"},
+  {foto:"", cap:"Makan enak", rasio:"4/5"},    {foto:"", cap:"Foto favorit", rasio:"4/3"},
+  {foto:"", cap:"Sore itu", rasio:"1/1"},      {foto:"", cap:"Kita", rasio:"3/4"}
+];
+const KATA = ["ILOVEYOU","HAPPYMENSIV","SAYANG","MABAR","ANON","CINTA"];
+const WARNA = ["#ffffff","#9cc4ea","#f4c6d2","#f7e1a0","#bfe2cb","#cbbdf0","#1d3347"];
+
+/* =====================================================
+   KODE
+   ===================================================== */
+const $ = id => document.getElementById(id);
+const el = (t,c,h) => { const e = document.createElement(t); if(c) e.className = c; if(h) e.innerHTML = h; return e; };
+
+/* foto dummy: pemandangan langit pastel dibuat dari SVG */
+function dummy(seed, w=800, h=1000){
+  const hues = [[205,212],[198,208],[215,222],[200,230]][seed % 4];
+  const c = (l,s=60,hh=hues[0]) => `hsl(${hh},${s}%,${l}%)`;
+  const sx = 120 + (seed*173)%560, sy = 140 + (seed*97)%260, r = 50 + (seed*31)%50;
+  const b1 = h*(.58+((seed*7)%10)/100), b2 = h*(.74+((seed*5)%8)/100);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c(88,70,hues[1])}"/><stop offset="1" stop-color="${c(96,60)}"/></linearGradient>
+  <filter id="b"><feGaussianBlur stdDeviation="18"/></filter></defs>
+  <rect width="${w}" height="${h}" fill="url(#g)"/>
+  <circle cx="${sx}" cy="${sy}" r="${r*1.8}" fill="#fff" opacity=".5" filter="url(#b)"/><circle cx="${sx}" cy="${sy}" r="${r}" fill="#fff" opacity=".9"/>
+  <ellipse cx="${w*.28}" cy="${h*.3}" rx="150" ry="34" fill="#fff" opacity=".7" filter="url(#b)"/><ellipse cx="${w*.78}" cy="${h*.42}" rx="190" ry="40" fill="#fff" opacity=".6" filter="url(#b)"/>
+  <path d="M0 ${b1} Q${w*.3} ${b1-90} ${w*.6} ${b1-20} T${w} ${b1-50} V${h} H0Z" fill="${c(72,45)}"/>
+  <path d="M0 ${b2} Q${w*.35} ${b2-70} ${w*.7} ${b2-10} T${w} ${b2-40} V${h} H0Z" fill="${c(58,42)}"/>
+  <path d="M0 ${h*.92} Q${w*.5} ${h*.84} ${w} ${h*.93} V${h} H0Z" fill="${c(42,40)}"/></svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+let dc = 0;
+function pic(src, alt, w, h){
+  const i = new Image(); i.alt = alt; i.loading = "lazy"; const fb = dummy(dc++, w, h);
+  i.onerror = () => { i.onerror = null; i.src = fb; };
+  i.src = src || fb; return i;
+}
+
+/* isi halaman */
+$("brand").textContent = CONFIG.namaKamu[0] + " & " + CONFIG.namaDia[0];
+$("foot").textContent = CONFIG.namaKamu + " untuk " + CONFIG.namaDia;
+(function(){
+  const s = new Date(CONFIG.tanggalJadian), n = new Date();
+  let m = (n.getFullYear()-s.getFullYear())*12 + n.getMonth()-s.getMonth(); if(n.getDate() < s.getDate()) m--;
+  const d = Math.max(0, Math.floor((n-s)/864e5));
+  $("meta").innerHTML = `<div><b>${Math.max(0,m)}</b><span>bulan</span></div><div><b>${d}</b><span>hari</span></div><div><b>${KATA.length}</b><span>kata tersembunyi</span></div>`;
+})();
+(function(){
+  const c = $("collage"), a = el("div","a"), b = el("div","b"), x = el("div"), y = el("div");
+  a.append(pic(HERO[0],"Foto kita",600,1000)); x.append(pic(HERO[1],"Foto kita",600,750)); y.append(pic(HERO[2],"Foto kita",600,600));
+  b.append(x,y); c.append(a,b);
+})();
+CERITA.forEach(e => {
+  const d = el("div","ev"), p = el("div","pic"), t = el("div","",`<time>${e.tgl}</time><h3>${e.judul}</h3><p>${e.teks}</p>`);
+  p.append(pic(e.foto, e.judul, 800, 600)); d.append(p,t); $("line").append(d);
+});
+GALERI.forEach(g => {
+  const [rw,rh] = g.rasio.split("/").map(Number), f = el("figure"); f.tabIndex = 0;
+  const i = pic(g.foto, g.cap, 800, Math.round(800*rh/rw)); f.append(i, el("figcaption","",g.cap));
+  const open = () => { $("lb").querySelector("img").src = i.src; $("lb").classList.add("on"); };
+  f.onclick = open; f.onkeydown = e => { if(e.key==="Enter") open(); };
+  $("gal").append(f);
+});
+document.addEventListener("keydown", e => { if(e.key==="Escape") $("lb").classList.remove("on"); });
+
+/* ---------- CARI KATA ---------- */
+const DIRS = [[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
+let N, board, placed, found, anchor, pending, dragging;
+function newGame(){
+  N = Math.max(10, ...KATA.map(k => k.length)) + 1;
+  board = Array.from({length:N}, () => Array(N).fill(""));
+  placed = {}; found = new Set(); anchor = pending = null; $("msg").textContent = "";
+  [...KATA].sort((a,b) => b.length - a.length).forEach(w => {
+    for(let t=0;t<500;t++){
+      const [dr,dc] = DIRS[Math.floor(Math.random()*(t<250 ? 3 : 8))];
+      const r = Math.floor(Math.random()*N), c = Math.floor(Math.random()*N), er = r+dr*(w.length-1), ec = c+dc*(w.length-1);
+      if(er<0||er>=N||ec<0||ec>=N) continue;
+      let ok = true; for(let i=0;i<w.length;i++){ const v = board[r+dr*i][c+dc*i]; if(v && v!==w[i]){ ok=false; break; } }
+      if(!ok) continue;
+      for(let i=0;i<w.length;i++) board[r+dr*i][c+dc*i] = w[i];
+      placed[w] = {r,c,er,ec}; break;
+    }
+  });
+  const abc = "ABCDEGHIKLMNOPRSTUY";
+  for(let r=0;r<N;r++) for(let c=0;c<N;c++) if(!board[r][c]) board[r][c] = abc[Math.floor(Math.random()*abc.length)];
+  const g = $("grid"); g.style.gridTemplateColumns = `repeat(${N},1fr)`; g.innerHTML = "";
+  for(let r=0;r<N;r++) for(let c=0;c<N;c++){ const d = el("div","cell",board[r][c]); d.dataset.r = r; d.dataset.c = c; d.setAttribute("role","gridcell"); g.append(d); }
+  $("words").innerHTML = KATA.map(k => `<li id="w-${k}">${k}</li>`).join("");
+}
+const cellAt = (r,c) => $("grid").children[r*N+c];
+const cellFrom = e => { const t = document.elementFromPoint(e.clientX, e.clientY); return t && t.classList.contains("cell") ? {r:+t.dataset.r, c:+t.dataset.c} : null; };
+function path(a,b){
+  const dr = b.r-a.r, dc = b.c-a.c, n = Math.max(Math.abs(dr),Math.abs(dc));
+  if(!(dr===0||dc===0||Math.abs(dr)===Math.abs(dc))) return [a];
+  return Array.from({length:n+1}, (_,i) => ({r:a.r+Math.sign(dr)*i, c:a.c+Math.sign(dc)*i}));
+}
+function mark(cells){ document.querySelectorAll(".cell.sel").forEach(x => x.classList.remove("sel")); cells.forEach(p => cellAt(p.r,p.c).classList.add("sel")); }
+function check(a,b){
+  for(const w of KATA){
+    if(found.has(w) || !placed[w]) continue;
+    const p = placed[w], f = a.r===p.r&&a.c===p.c&&b.r===p.er&&b.c===p.ec, k = a.r===p.er&&a.c===p.ec&&b.r===p.r&&b.c===p.c;
+    if(f||k){
+      found.add(w); $("w-"+w).classList.add("done");
+      path({r:p.r,c:p.c},{r:p.er,c:p.ec}).forEach(q => cellAt(q.r,q.c).classList.add("found","pop"));
+      $("msg").textContent = found.size===KATA.length ? "Semua kata ketemu. Sama seperti aku yang ketemu kamu." : "Ketemu: " + w;
+      return;
+    }
+  }
+  $("msg").textContent = "Belum pas, coba lagi.";
+}
+const G = $("grid");
+G.addEventListener("pointerdown", e => {
+  const c = cellFrom(e); if(!c) return;
+  if(pending){ const a = pending; pending = null; mark([]); check(a,c); return; }
+  anchor = c; dragging = true; mark([c]); G.setPointerCapture(e.pointerId);
+});
+G.addEventListener("pointermove", e => { if(!dragging) return; const c = cellFrom(e); if(c) mark(path(anchor,c)); });
+G.addEventListener("pointerup", e => {
+  if(!dragging) return; dragging = false; const c = cellFrom(e) || anchor;
+  if(c.r===anchor.r && c.c===anchor.c){ pending = anchor; return; }   /* ketuk satu huruf, lalu ketuk huruf akhir */
+  mark([]); check(anchor,c);
+});
+newGame();
+
+/* ---------- PHOTOBOOTH ---------- */
+const CAM_SVG = `<svg viewBox="0 0 64 64" fill="none" stroke="#2f5f8c" stroke-width="3" stroke-linejoin="round"><rect x="6" y="18" width="52" height="34" rx="6" fill="#cfe3f6"/><path d="M22 18l4-7h12l4 7"/><circle cx="32" cy="35" r="11" fill="#fff"/><circle cx="32" cy="35" r="5" fill="#9cc4ea"/><circle cx="50" cy="26" r="1.5" fill="#2f5f8c"/></svg>`;
+if(CONFIG.ikonKamera){ const i = new Image(); i.alt = ""; i.onload = () => { $("camIcon").innerHTML = ""; $("camIcon").append(i); }; i.src = CONFIG.ikonKamera; }
+$("camIcon").innerHTML = CAM_SVG;
+let fcolor = WARNA[0], stream = null, shots = [], busy = false, upImg = null, framePic = null;
+const screen = $("screen"), video = $("video");
+screen.style.setProperty("--fc", fcolor);
+if(CONFIG.framePNG){ framePic = new Image(); framePic.onload = () => { $("fr").src = CONFIG.framePNG; $("fr").hidden = false; screen.style.borderWidth = "0"; }; framePic.src = CONFIG.framePNG; }
+WARNA.forEach((w,i) => {
+  const b = el("button","sw"); b.style.background = w; b.setAttribute("aria-label","Warna frame "+(i+1)); b.setAttribute("aria-pressed", i===0);
+  b.onclick = () => { fcolor = w; screen.style.setProperty("--fc", w); [...$("colors").querySelectorAll(".sw")].forEach(x => x.setAttribute("aria-pressed", x===b)); };
+  $("colors").append(b);
+});
+const setStatus = t => $("status").textContent = t;
+async function startCam(){
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:960}},audio:false});
+    video.srcObject = stream; video.hidden = false; $("up").hidden = true; $("ph").hidden = true; upImg = null;
+    $("btnShot").disabled = false; $("btnCam").textContent = "Kamera aktif"; $("camMsg").textContent = ""; setStatus("Kamera aktif");
+  }catch(e){ $("camMsg").textContent = "Kamera tidak bisa dibuka. Pastikan izin kamera aktif dan halaman dibuka lewat HTTPS, atau pakai Upload foto."; }
+}
+function useUpload(inp){
+  const f = inp.files[0]; if(!f) return;
+  const u = new Image(); u.onload = () => { upImg = u; $("up").src = u.src; $("up").hidden = false; video.hidden = true; $("ph").hidden = true; $("btnShot").disabled = false; setStatus("Memakai foto upload"); $("camMsg").textContent = "Foto yang diupload dipakai untuk ketiga jepretan."; };
+  u.src = URL.createObjectURL(f);
+}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+async function photoshoot(){
+  if(busy) return; busy = true; $("btnShot").disabled = true; resetStrip();
+  $("strip").innerHTML = "";
+  for(let n=0;n<3;n++){
+    setStatus(`Foto ${n+1} dari 3`);
+    for(let c=3;c>0;c--){ $("count").textContent = c; await wait(800); }
+    $("count").textContent = "";
+    const f = $("flash"); f.classList.remove("go"); void f.offsetWidth; f.classList.add("go");
+    const url = capture(); shots.push(url);
+    const im = new Image(); im.src = url; im.alt = "Hasil foto"; im.className = "polaroid"; $("strip").append(im);
+    await wait(1000);
+  }
+  setStatus("Selesai"); busy = false; $("btnShot").disabled = false; $("btnDl").disabled = false;
+}
+const W = 600, H = 800, B = 34, CAPH = 78;
+const dark = h => { const n = parseInt(h.slice(1),16); return ((n>>16)*.299 + ((n>>8)&255)*.587 + (n&255)*.114) < 140; };
+function capture(){
+  const cv = document.createElement("canvas"); cv.width = W; cv.height = H + CAPH; const x = cv.getContext("2d");
+  x.fillStyle = fcolor; x.fillRect(0,0,cv.width,cv.height);
+  const iw = W-B*2, ih = H-B*2, src = upImg || video, sw = upImg ? upImg.naturalWidth : video.videoWidth, sh = upImg ? upImg.naturalHeight : video.videoHeight;
+  const rt = iw/ih; let cw = sw, ch = sw/rt; if(ch > sh){ ch = sh; cw = sh*rt; }
+  x.save(); x.translate(B+iw, B); x.scale(-1,1); x.drawImage(src,(sw-cw)/2,(sh-ch)/2,cw,ch,0,0,iw,ih); x.restore();
+  if(framePic && framePic.naturalWidth) x.drawImage(framePic,0,0,W,H);
+  x.fillStyle = dark(fcolor) ? "#fff" : "#2f5f8c"; x.font = "500 44px 'Cormorant Garamond', Georgia, serif"; x.textAlign = "center";
+  x.fillText(CONFIG.caption, W/2, H + CAPH/2 - 4);
+  return cv.toDataURL("image/jpeg", .92);
+}
+function resetStrip(){ shots = []; $("strip").innerHTML = '<p class="hint">Hasil fotomu akan muncul di sini.</p>'; $("btnDl").disabled = true; }
+async function downloadStrip(){
+  if(!shots.length) return;
+  const ims = await Promise.all(shots.map(s => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = s; })));
+  const g = 28, w = W/2, h = (H+CAPH)/2, cv = document.createElement("canvas");
+  cv.width = w+g*2; cv.height = (h+g)*ims.length+g;
+  const x = cv.getContext("2d"); x.fillStyle = "#e6f1fb"; x.fillRect(0,0,cv.width,cv.height);
+  ims.forEach((im,i) => x.drawImage(im,g,g+i*(h+g),w,h));
+  const a = document.createElement("a"); a.download = "photobooth.png"; a.href = cv.toDataURL("image/png"); a.click();
+}
+resetStrip();
+</script>
+</body>
+</html>
