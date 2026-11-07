@@ -229,41 +229,51 @@ footer p:last-child{color:var(--soft);margin-top:12px;font-size:.9rem}
 
 <script>
 /* =====================================================
-   PENGATURAN. Ganti isi di blok ini saja.
-   Kosongkan "foto" ("") untuk memakai foto dummy otomatis.
+   PENGATURAN & ASSET FOTO
    ===================================================== */
 const CONFIG = {
   namaKamu: "Nama Kamu",
   namaDia: "Nama Dia",
-  tanggalJadian: "2026-10-06",     // TAHUN-BULAN-TANGGAL
-  ikonKamera: "",                  // contoh: "aset/kamera.png" (PNG Pngtree)
-  framePNG: "",                    // contoh: "aset/frame.png" (PNG transparan, rasio 3:4)
+  tanggalJadian: "2026-10-06",    // TAHUN-BULAN-TANGGAL
+  ikonKamera: "",                  
+  framePNG: "",                    
   caption: "Satu bulan kita"
 };
-const HERO = ["", "", ""];         // 3 foto di bagian atas, contoh: "foto/hero1.jpg"
+
+const HERO = [
+  "assets/images/photo/photo_6303092754787013268_w.jpg",
+  "assets/images/photo/photo_6303092754787013269_x.jpg",
+  "assets/images/photo/photo_6303092754787013270_x.jpg"
+];
+
 const CERITA = [
-  {tgl:"Awal", judul:"Pertama kali lihat", foto:"", teks:"Aku lihat usernamemu di CF temanku. Aku bilang ke dia, ada yang ganteng, boleh dikenalin. Niatnya cuma bercanda."},
-  {tgl:"Minggu pertama", judul:"Chat lewat anon", foto:"", teks:"Candaan itu ternyata diseriusin. Kamu belum mau di-chat duluan, jadi kita mulai lewat anon."},
-  {tgl:"Beberapa hari kemudian", judul:"Aku chat duluan", foto:"", teks:"Aku sudah bosan anon-anonan, jadi aku chat kamu langsung. Sejak itu obrolan kita ngalir."},
-  {tgl:"Setelahnya", judul:"Ngobrol dan mabar", foto:"", teks:"Kadang bahas hal random, kadang mabar sampai lupa waktu. Pelan-pelan kamu jadi kebiasaan favoritku."},
-  {tgl:"Hari jadi", judul:"Kamu bilang suka", foto:"", teks:"Lalu tiba hari kamu nembak aku. Jawabanku sudah jelas dari lama."}
+  {tgl:"Awal", judul:"Pertama kali lihat", foto:"assets/images/photo/photo_6303092754787013271_x.jpg", teks:"Aku lihat usernamemu di CF temanku. Aku bilang ke dia, ada yang ganteng, boleh dikenalin. Niatnya cuma bercanda."},
+  {tgl:"Minggu pertama", judul:"Chat lewat anon", foto:"assets/images/photo/photo_6303092754787013272_x.jpg", teks:"Candaan itu ternyata diseriusin. Kamu belum mau di-chat duluan, jadi kita mulai lewat anon."},
+  {tgl:"Beberapa hari kemudian", judul:"Aku chat duluan", foto:"assets/images/photo/photo_6303092754787013273_x.jpg", teks:"Aku sudah bosan anon-anonan, jadi aku chat kamu langsung. Sejak itu obrolan kita ngalir."},
+  {tgl:"Setelahnya", judul:"Ngobrol dan mabar", foto:"assets/images/photo/photo_6303092754787013274_y.jpg", teks:"Kadang bahas hal random, kadang mabar sampai lupa waktu. Pelan-pelan kamu jadi kebiasaan favoritku."},
+  {tgl:"Hari jadi", judul:"Kamu bilang suka", foto:"assets/images/photo/photo_6303092754787013275_x.jpg", teks:"Lalu tiba hari kamu nembak aku. Jawabanku sudah jelas dari lama."}
 ];
-const GALERI = [   // rasio: "4/5", "1/1", "3/4", "4/3"
-  {foto:"", cap:"Hari pertama", rasio:"4/5"}, {foto:"", cap:"Mabar bareng", rasio:"4/3"},
-  {foto:"", cap:"Senyummu", rasio:"3/4"},     {foto:"", cap:"Jalan berdua", rasio:"1/1"},
-  {foto:"", cap:"Makan enak", rasio:"4/5"},    {foto:"", cap:"Foto favorit", rasio:"4/3"},
-  {foto:"", cap:"Sore itu", rasio:"1/1"},      {foto:"", cap:"Kita", rasio:"3/4"}
+
+const GALERI = [
+  {foto:"assets/images/photo/photo_6303092754787013276_x.jpg", cap:"Hari pertama", rasio:"4/5"}, 
+  {foto:"assets/images/photo/photo_6303092754787013277_x.jpg", cap:"Mabar bareng", rasio:"4/3"},
+  {foto:"assets/images/photo/photo_6303092754787013278_x.jpg", cap:"Senyummu", rasio:"3/4"}, 
+  {foto:"assets/images/photo/photo_6303092754787013279_x.jpg", cap:"Jalan berdua", rasio:"1/1"},
+  {foto:"assets/images/photo/photo_6303092754787013280_x.jpg", cap:"Makan enak", rasio:"4/5"}, 
+  {foto:"assets/images/photo/photo_6303092754787013281_x.jpg", cap:"Foto favorit", rasio:"4/3"},
+  {foto:"assets/images/photo/photo_6303092754787013282_x.jpg", cap:"Sore itu", rasio:"1/1"}, 
+  {foto:"assets/images/photo/photo_6303092754787013283_x.jpg", cap:"Kita", rasio:"3/4"}
 ];
+
 const KATA = ["ILOVEYOU","HAPPYMENSIV","SAYANG","MABAR","ANON","CINTA"];
 const WARNA = ["#ffffff","#9cc4ea","#f4c6d2","#f7e1a0","#bfe2cb","#cbbdf0","#1d3347"];
 
 /* =====================================================
-   KODE
+   KODE SISTEM
    ===================================================== */
 const $ = id => document.getElementById(id);
 const el = (t,c,h) => { const e = document.createElement(t); if(c) e.className = c; if(h) e.innerHTML = h; return e; };
 
-/* foto dummy: pemandangan langit pastel dibuat dari SVG */
 function dummy(seed, w=800, h=1000){
   const hues = [[205,212],[198,208],[215,222],[200,230]][seed % 4];
   const c = (l,s=60,hh=hues[0]) => `hsl(${hh},${s}%,${l}%)`;
@@ -287,7 +297,6 @@ function pic(src, alt, w, h){
   i.src = src || fb; return i;
 }
 
-/* isi halaman */
 $("brand").textContent = CONFIG.namaKamu[0] + " & " + CONFIG.namaDia[0];
 $("foot").textContent = CONFIG.namaKamu + " untuk " + CONFIG.namaDia;
 (function(){
@@ -368,7 +377,7 @@ G.addEventListener("pointerdown", e => {
 G.addEventListener("pointermove", e => { if(!dragging) return; const c = cellFrom(e); if(c) mark(path(anchor,c)); });
 G.addEventListener("pointerup", e => {
   if(!dragging) return; dragging = false; const c = cellFrom(e) || anchor;
-  if(c.r===anchor.r && c.c===anchor.c){ pending = anchor; return; }   /* ketuk satu huruf, lalu ketuk huruf akhir */
+  if(c.r===anchor.r && c.c===anchor.c){ pending = anchor; return; }
   mark([]); check(anchor,c);
 });
 newGame();
@@ -424,7 +433,7 @@ function capture(){
   x.save(); x.translate(B+iw, B); x.scale(-1,1); x.drawImage(src,(sw-cw)/2,(sh-ch)/2,cw,ch,0,0,iw,ih); x.restore();
   if(framePic && framePic.naturalWidth) x.drawImage(framePic,0,0,W,H);
   x.fillStyle = dark(fcolor) ? "#fff" : "#2f5f8c"; x.font = "500 44px 'Cormorant Garamond', Georgia, serif"; x.textAlign = "center";
-  x.fillText(CONFIG.caption, W/2, H + CAPH/2 - 4);
+  x.fillText(CONFIG.caption, W/2, H + CAPH / 2 + 10);
   return cv.toDataURL("image/jpeg", .92);
 }
 function resetStrip(){ shots = []; $("strip").innerHTML = '<p class="hint">Hasil fotomu akan muncul di sini.</p>'; $("btnDl").disabled = true; }
